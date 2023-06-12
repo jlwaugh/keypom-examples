@@ -17,7 +17,7 @@ const {
 
 async function createDaoDrop() {
     // Change this to your account ID
-    const FUNDER_ACCOUNT_ID = "mintlu.near";
+    const FUNDER_ACCOUNT_ID = "hack.near";
     const NETWORK_ID = "mainnet";
 
     // Initiate connection to the NEAR blockchain.
@@ -50,8 +50,9 @@ async function createDaoDrop() {
         account: fundingAccount,
         numKeys: 1,
         config: {
-            usesPerKey: 1
+            usesPerKey: 111
         },
+        /// requiredGas: (120*TERA_GAS).toString(),
         depositPerUseNEAR: "0.1",
         fcData: {
             methods: [
@@ -62,10 +63,10 @@ async function createDaoDrop() {
                         args: JSON.stringify({
                             dao_contract: DAO_CONTRACT_MAINNET,
                             proposal: {
-                                description: "Auto-Registering New Member",
+                                description: "Adding New Member",
                                 kind: {
                                     AddMemberToRole:{
-                                        role: "new-onboardee-role"
+                                        role: "voter"
                                     }
                                 }
                             }
@@ -77,12 +78,7 @@ async function createDaoDrop() {
                     }
                 ],
             ]   
-        }
-        
-        // Required Gas is commented out for now due to a MNW discrepency.
-        // If uncommented, the claim will fail quietly. 
-        // Once MNW mainnet is updated, this will allow create_account_and_claim to succeed
-        // requiredGas: (120*TERA_GAS).toString(),   
+        }   
     })
 
 
